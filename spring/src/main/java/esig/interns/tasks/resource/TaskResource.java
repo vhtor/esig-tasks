@@ -1,16 +1,18 @@
 package esig.interns.tasks.resource;
 
 import esig.interns.tasks.model.Response;
+import esig.interns.tasks.model.Task;
 import esig.interns.tasks.service.implementation.TaskServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 import static java.time.LocalDateTime.now;
+import static java.util.Map.of;
+import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -24,10 +26,23 @@ public class TaskResource {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("tasks", taskService.list(30)))
+                        .data(of("tasks", taskService.list(30)))
                         .message("Tasks retrieved")
                         .status(OK)
                         .statusCode(OK.value())
+                        .build()
+        );
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Response> addTask(@RequestBody @Valid Task task) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("task", taskService.create(task)))
+                        .message("Task added successfully")
+                        .status(CREATED)
+                        .statusCode(CREATED.value())
                         .build()
         );
     }
