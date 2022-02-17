@@ -1,6 +1,7 @@
 package esig.interns.tasks.model;
 
 import esig.interns.tasks.enumeration.Priority;
+import esig.interns.tasks.enumeration.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,10 +23,10 @@ public class Task {
     private Long id;
     @Column(unique = true)
     @NotEmpty(message = "O número da tarefa não pode estar vazio ou nulo")
-    private Integer number;
+    private int number;
     private String title;
     private String owner;
     private String deadline;
-    private String status;
+    private Status status;
     private Priority priority;
 }

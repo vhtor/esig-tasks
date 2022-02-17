@@ -46,4 +46,32 @@ public class TaskResource {
                         .build()
         );
     }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Response> getTask(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("task", taskService.get(id)))
+                        .message("Task retrieved")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+
+    @DeleteMapping ("/delete/{id}")
+    public ResponseEntity<Response> deleteTask(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(of("deleted", taskService.delete(id)))
+                        .message("Task deleted successfully")
+                        .status(OK)
+                        .statusCode(OK.value())
+                        .build()
+        );
+    }
+
+
 }
