@@ -86,6 +86,6 @@ export class TaskService {
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);
-    return throwError(`Um erro ocorreu - Código do erro: ${error.status}`);
+    return throwError(() => `Um erro ocorreu - Código do erro: ${error.status}`);
   }
 }
