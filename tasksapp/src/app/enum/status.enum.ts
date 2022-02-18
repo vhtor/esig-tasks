@@ -1,3 +1,3 @@
 export enum Status {
-  ALL = 'Todas', UNFINISHED = 'Não Concluída', FINISHED = 'Concluída'
+  ALL = 'ALL', UNFINISHED = 'UNFINISHED', FINISHED = 'FINISHED'
 }

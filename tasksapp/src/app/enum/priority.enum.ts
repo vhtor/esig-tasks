@@ -1,3 +1,3 @@
 export enum Priority {
-  ALL = 'Todas', LOW = 'Baixa', MEDIUM = 'Média', HIGH = 'Alta'
+  ALL = 'ALL', LOW = 'LOW', MEDIUM = 'MEDIUM', HIGH = 'HIGH'
 }

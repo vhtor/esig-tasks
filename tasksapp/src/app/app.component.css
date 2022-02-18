@@ -3,7 +3,24 @@ body {
   background: #f5f5f5 ;
   font-family: 'Overpass', serif;
   font-size: 13px;
+  padding: 0;
+  margin: 0;
 }
+
+.btn-primary,
+select[name="status"],
+a.btn-success {
+  padding: 10px 20px;
+  margin: 0;
+  border: 0;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+a i.material-icons {
+  font-size: 20px !important;
+}
+
 
 .table-responsive {
   margin: 30px 0;
@@ -11,7 +28,7 @@ body {
 
 .table-wrapper {
   background: #fff;
-  padding: 20px 25px;
+  padding: 30px 15%;
   border-radius: 3px;
   min-width: 1000px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
