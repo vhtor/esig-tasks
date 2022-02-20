@@ -27,6 +27,6 @@ public class Task {
     private String title;
     private String owner;
     private String deadline;
-    private Boolean status;
+    private Integer status;
     private Priority priority;
 }

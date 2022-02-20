@@ -5,6 +5,6 @@ export interface Task {
   title: string,
   owner: string,
   deadline: string,
+  status: number,
   priority: Priority
-  status: boolean,
 }

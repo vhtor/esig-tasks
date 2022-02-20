@@ -17,7 +17,7 @@
               </a>
 
               <span>
-                <select (ngModelChange)="filterTasksByPriority($event)" ngModel="ALL" name="priority" class="btn btn-info" >
+                <select id="filterSelect" (ngModelChange)="filterTasksByPriority($event)" ngModel="ALL" name="priority" class="btn btn-info" >
                   <option value="ALL">Prioridade (Todas)</option>
                   <option value="HIGH">Alta</option>
                   <option value="MEDIUM">Média</option>
@@ -86,7 +86,7 @@
   <div id="addEmployeeModal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form #taskForm="ngForm">
+        <form #taskForm="ngForm" (ngSubmit)="addTask(taskForm)">
 
           <div class="modal-header">
             <h4 class="modal-title">Adicionar Task</h4>
@@ -96,36 +96,36 @@
           <div class="modal-body">
             <div class="form-group">
               <label>Título</label>
-              <input type="text" ngModel name="name" class="form-control" required>
+              <input type="text" name="title" ngModel class="form-control" required>
             </div>
 
             <div class="row">
               <div class="col-x1-6 col-lg-6 col-md-6 col-sm-6 col-6">
                 <div class="form-group">
                   <label>Responsável</label>
-                  <input type="text" ngModel name="type" class="form-control" required>
+                  <input type="text" name="owner" ngModel class="form-control" required>
                 </div>
               </div>
 
               <div class="col-x1-6 col-lg-6 col-md-6 col-sm-6 col-6">
                 <div class="form-group">
                   <label>Deadline</label>
-                  <input type="text" class="form-control" ngModel name="deadline" required>
+                  <input type="text" name="deadline" class="form-control" ngModel required>
                 </div>
               </div>
             </div>
 
             <div class="form-group">
               <label>Status</label>
-              <select name="status" ngModel="UNFINISHED" class="form-control" name="status" required>
-                <option value="UNFINISHED">Não concluída</option>
-                <option value="FINISHED">Concluída</option>
+              <select name="status" ngModel="0" class="form-control" required>
+                <option value="1">Concluída</option>
+                <option value="0">Não Concluída</option>
               </select>
             </div>
 
             <div class="form-group">
               <label>Prioridade</label>
-              <select name="status" ngModel="HIGH" class="form-control" name="status" required>
+              <select name="priority" ngModel="HIGH" class="form-control" required>
                 <option value="HIGH">Alta</option>
                 <option value="MEDIUM">Média</option>
                 <option value="LOW">Baixa</option>
@@ -141,7 +141,7 @@
             <button type="submit" [disabled]="taskForm.invalid || (isLoading$ | async)" class="btn btn-success">
               <i *ngIf="isLoading$ | async" class="fas fa-spinner fa-spin"></i>
               <span *ngIf="isLoading$ | async">Adicionando task...</span>
-              <span *ngIf="!(isLoading$ |async)">Adicionar task</span>
+              <span *ngIf="!(isLoading$ | async)">Adicionar task</span>
             </button>
           </div>
         </form>

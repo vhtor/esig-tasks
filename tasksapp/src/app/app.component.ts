@@ -6,6 +6,7 @@ import { Priority } from './enum/priority.enum';
 import { AppState } from './interface/app-state';
 import { CustomResponse } from './interface/custom-response';
 import { TaskService } from './service/task.service';
+import { Task } from './interface/task';
 
 @Component({
   selector: 'app-root',
@@ -19,10 +20,8 @@ export class AppComponent implements OnInit {
   readonly DataState = DataState;
   readonly Priority = Priority;
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
-  private filterSubject = new BehaviorSubject<string>('');
   private isLoading = new BehaviorSubject<boolean>(false);
 
-  filterStatus$ = this.filterSubject.asObservable();
   isLoading$ = this.isLoading.asObservable();
 
   constructor(private taskService: TaskService) {}
@@ -48,6 +47,27 @@ export class AppComponent implements OnInit {
       }),
       startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
       catchError(( error: string ) => {
+        return of({ dataState: DataState.ERROR_STATE, error });
+      })
+    );
+  }
+
+  addTask(taskForm: NgForm): void {
+    this.isLoading.next(true);
+    this.appState$ = this.taskService.add$(taskForm.value)
+    .pipe(
+      map(response => {
+        this.dataSubject.next(
+          {...response, data: { tasks: [response.data.task, ...this.dataSubject.value.data.tasks] }}
+        );
+        document.getElementById('closeModal').click();
+        this.isLoading.next(false);
+        taskForm.resetForm();
+        return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }
+      }),
+      startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
+      catchError(( error: string ) => {
+        this.isLoading.next(false);
         return of({ dataState: DataState.ERROR_STATE, error });
       })
     );

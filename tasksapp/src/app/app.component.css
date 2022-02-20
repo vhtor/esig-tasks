@@ -8,7 +8,7 @@ body {
 }
 
 .btn-primary,
-select[name="priority"],
+#filterSelect,
 a.btn-success {
   padding: 10px 20px;
   margin: 0;
