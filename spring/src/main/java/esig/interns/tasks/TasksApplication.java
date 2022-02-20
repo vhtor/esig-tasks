@@ -26,10 +26,11 @@ public class TasksApplication {
 	@Bean
 	CommandLineRunner run(TaskRepo taskRepo) {
 		return args -> {
-			taskRepo.save(new Task(null, "1", "Task teste 1", "Victor Hugo", "20-02-2022", UNFINISHED, HIGH));
-			taskRepo.save(new Task(null, "2", "Task teste 2", "Fernanda", "16-02-2022", UNFINISHED, HIGH));
-			taskRepo.save(new Task(null, "3", "Task teste 3", "Sivirino", "15-02-2022", FINISHED, LOW));
-			taskRepo.save(new Task(null, "4", "Task teste 4", "Jusefa", "23-02-2022", FINISHED, MEDIUM));
+			taskRepo.save(new Task(null, "Task teste 1", "Victor Hugo", "20-02-2022", false, HIGH)); // Status false significa que a task não foi completada
+			taskRepo.save(new Task(null, "Task teste 2", "Fernanda", "16-02-2022", true, HIGH));
+			taskRepo.save(new Task(null, "Task teste 3", "Severino", "15-02-2022", true, LOW));
+			taskRepo.save(new Task(null, "Task teste 4", "Josefa", "23-02-2022", false, MEDIUM));
+			taskRepo.save(new Task(null, "Task teste 5", "Tião", "28-02-2022", false, LOW));
 		};
 	}
 

@@ -23,12 +23,9 @@ public class Task {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
-    @Column(unique = true)
-    @NotEmpty(message = "O número da tarefa não pode estar vazio ou nulo")
-    private String number;
     private String title;
     private String owner;
     private String deadline;
-    private Status status;
+    private Boolean status;
     private Priority priority;
 }

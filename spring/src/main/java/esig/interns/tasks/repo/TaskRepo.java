@@ -4,5 +4,5 @@ import esig.interns.tasks.model.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TaskRepo extends JpaRepository<Task, Long> {
-    Task findByNumber(Integer number);
+    Task findById(Integer id);
 }
