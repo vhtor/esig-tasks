@@ -56,9 +56,9 @@
                   <td>{{ task.deadline }}</td>
 
                   <td [ngSwitch]="task.priority">
-                    <span *ngSwitchCase="Priority.HIGH">Alta</span>
-                    <span *ngSwitchCase="Priority.MEDIUM">Média</span>
-                    <span *ngSwitchCase="Priority.LOW">Baixa</span>
+                    <span class="badge-danger" *ngSwitchCase="Priority.HIGH">Alta</span>
+                    <span class="badge-warning" *ngSwitchCase="Priority.MEDIUM">Média</span>
+                    <span class="badge-primary" *ngSwitchCase="Priority.LOW">Baixa</span>
                   </td>
                   
                   <td>
