@@ -7,6 +7,7 @@ import { AppState } from './interface/app-state';
 import { CustomResponse } from './interface/custom-response';
 import { TaskService } from './service/task.service';
 import { Task } from './interface/task';
+import { NotificationService } from './service/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -24,16 +25,18 @@ export class AppComponent implements OnInit {
 
   isLoading$ = this.isLoading.asObservable();
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private notifier: NotificationService) {}
 
   ngOnInit(): void {
     this.appState$ = this.taskService.tasks$.pipe(
       map( response => {
+        this.notifier.onDefault(response.message);
         this.dataSubject.next(response);
         return { dataState: DataState.LOADED_STATE, appData: response };
       }),
       startWith({ dataState: DataState.LOADING_STATE }),
       catchError((error: string) => {
+        this.notifier.onError(error);
         return of({ dataState: DataState.ERROR_STATE, error });
       })
     );
@@ -57,6 +60,7 @@ export class AppComponent implements OnInit {
     this.appState$ = this.taskService.add$(taskForm.value)
     .pipe(
       map(response => {
+        this.notifier.onSuccess(response.message);
         this.dataSubject.next(
           {...response, data: { tasks: [response.data.task, ...this.dataSubject.value.data.tasks] }}
         );
@@ -67,6 +71,7 @@ export class AppComponent implements OnInit {
       }),
       startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
       catchError(( error: string ) => {
+        this.notifier.onError(error);
         this.isLoading.next(false);
         return of({ dataState: DataState.ERROR_STATE, error });
       })
@@ -77,6 +82,7 @@ export class AppComponent implements OnInit {
     this.appState$ = this.taskService.delete$(task.id)
     .pipe(
       map(response => {
+        this.notifier.onInfo(response.message);
         this.dataSubject.next(
           { ...response, data: 
             { tasks: this.dataSubject.value.data.tasks.filter(t => t.id !== task.id) }
@@ -86,6 +92,7 @@ export class AppComponent implements OnInit {
       }),
       startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
       catchError(( error: string ) => {
+        this.notifier.onError(error);
         return of({ dataState: DataState.ERROR_STATE, error });
       })
     );
