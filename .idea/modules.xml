@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/esig-fs-tasks.iml" filepath="$PROJECT_DIR$/.idea/esig-fs-tasks.iml" />
-      <module fileurl="file://$PROJECT_DIR$/spring/tasks.iml" filepath="$PROJECT_DIR$/spring/tasks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/tasks.iml" filepath="$PROJECT_DIR$/backend/tasks.iml" />
     </modules>
   </component>
 </project>
