@@ -98,6 +98,26 @@ export class AppComponent implements OnInit {
     );
   }
 
+  completeTask(task: Task): void {
+    this.appState$ = this.taskService.delete$(task.id)
+    .pipe(
+      map(response => {
+        this.notifier.onSuccess('Task marcada como concluída');
+        this.dataSubject.next(
+          { ...response, data: 
+            { tasks: this.dataSubject.value.data.tasks.filter(t => t.id !== task.id) }
+          }
+        );
+        return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }
+      }),
+      startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
+      catchError(( error: string ) => {
+        this.notifier.onError(error);
+        return of({ dataState: DataState.ERROR_STATE, error });
+      })
+    );
+  }
+
   printXLSReport(): void {
     let dataType = 'application/vnd.ms-excel.sheet.macroEnabled.12';
     let tableSelect = document.getElementById('tasks');

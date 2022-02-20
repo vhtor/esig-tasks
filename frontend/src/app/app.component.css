@@ -140,6 +140,10 @@ table.table td a.delete {
   color: #F44336;
 }
 
+table.table td a.done:hover {
+  color: #2A8838;
+}
+
 table.table td i {
   font-size: 30px;
 }

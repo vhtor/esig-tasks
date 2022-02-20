@@ -73,7 +73,11 @@
                 <td>
                   <a (click)="deleteTask(task)" class="delete" data-toggle="modal"
                       style="cursor: pointer;"><i class="material-icons" data-toggle="tooltip"
-                          title="Delete">&#xE872;</i>
+                          title="Excluir task">delete</i>
+                  </a>
+                  <a (click)="completeTask(task)" class="done" data-toggle="modal"
+                      style="cursor: pointer;"><i class="material-icons " data-toggle="tooltip"
+                          title="Marcar como concluída">check_circle</i>
                   </a>
                 </td>
               </tr>
