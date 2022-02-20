@@ -9,7 +9,17 @@
             </div>
 
             <div class="col-sm-8">
-              <button type="button" class="btn btn-primary">Imprimir Relatório</button>
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Gerar Relatório
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a (click)="printXLSReport()" class="dropdown-item" href="#" type="button">em Planilha (.xls)</a>
+                  <a (click)="printPDFReport()" class="dropdown-item" href="#" type="button">em PDF</a>
+
+                </div>
+
+              </div>
 
               <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
                 <i class="material-icons">&#xE147;</i>
@@ -62,7 +72,7 @@
                   </td>
                   
                   <td>
-                    <a class="delete" data-toggle="modal"
+                    <a (click)="deleteTask(task)" class="delete" data-toggle="modal"
                         style="cursor: pointer;"><i class="material-icons" data-toggle="tooltip"
                             title="Delete">&#xE872;</i>
                     </a>

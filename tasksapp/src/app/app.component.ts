@@ -72,4 +72,39 @@ export class AppComponent implements OnInit {
       })
     );
   }
+
+  deleteTask(task: Task): void {
+    this.appState$ = this.taskService.delete$(task.id)
+    .pipe(
+      map(response => {
+        this.dataSubject.next(
+          { ...response, data: 
+            { tasks: this.dataSubject.value.data.tasks.filter(t => t.id !== task.id) }
+          }
+        );
+        return { dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }
+      }),
+      startWith({ dataState: DataState.LOADED_STATE, appData: this.dataSubject.value }),
+      catchError(( error: string ) => {
+        return of({ dataState: DataState.ERROR_STATE, error });
+      })
+    );
+  }
+
+  printXLSReport(): void {
+    let dataType = 'application/vnd.ms-excel.sheet.macroEnabled.12';
+    let tableSelect = document.getElementById('tasks');
+    let tableHtml = tableSelect.outerHTML.replace(/ /g, '%20');
+    let downloadLink = document.createElement('a');
+    document.body.appendChild(downloadLink);
+    downloadLink.href = 'data:' + dataType + ', ' + tableHtml;
+    downloadLink.download = 'tasks-report.xls';
+    downloadLink.click();
+    document.body.removeChild(downloadLink); 
+  }
+
+  printPDFReport(): void {
+    window.print();
+  }
+
 }
