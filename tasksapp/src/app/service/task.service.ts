@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Priority } from '../enum/priority.enum';
-import { Status } from '../enum/status.enum';
 import { CustomResponse } from '../interface/custom-response';
 
 @Injectable({ providedIn: 'root' })

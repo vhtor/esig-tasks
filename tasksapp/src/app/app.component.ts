@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { BehaviorSubject, catchError, map, Observable, of, startWith } from 'rxjs';
 import { DataState } from './enum/data-state.enum';
 import { Priority } from './enum/priority.enum';
-import { Status } from './enum/status.enum';
 import { AppState } from './interface/app-state';
 import { CustomResponse } from './interface/custom-response';
 import { TaskService } from './service/task.service';
@@ -18,7 +17,6 @@ export class AppComponent implements OnInit {
   appState$: Observable<AppState<CustomResponse>>;
 
   readonly DataState = DataState;
-  readonly Status = Status;
   readonly Priority = Priority;
   private dataSubject = new BehaviorSubject<CustomResponse>(null);
   private filterSubject = new BehaviorSubject<string>('');

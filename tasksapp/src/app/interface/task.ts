@@ -1,5 +1,4 @@
 import { Priority } from "../enum/priority.enum";
-import { Status } from "../enum/status.enum";
 
 export interface Task {
   id: number,
