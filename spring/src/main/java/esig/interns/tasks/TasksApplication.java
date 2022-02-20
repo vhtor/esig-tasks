@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static esig.interns.tasks.enumeration.Priority.*;
-import static esig.interns.tasks.enumeration.Status.*;
 
 @SpringBootApplication
 public class TasksApplication {
